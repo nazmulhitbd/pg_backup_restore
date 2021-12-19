@@ -1,0 +1,12 @@
+#pg_dump schema backup
+/usr/edb/as11/bin/pg_dump --host 10.10.10.70 --port 5460 --username "enterprisedb" --schema hr -Fc --verbose -f /tmp/hr.dump short_db >> /tmp/hr.log 2>&1
+/usr/edb/as11/bin/pg_dump --host 10.10.10.70 --port 5460 --username "enterprisedb" --no-owner --no-privileges  --schema excel -Fc --verbose -f /tmp/excel.dump short_db >> /tmp/excel.log 2>&1
+
+#pg_dump all schema
+ 
+ 
+
+#pg_restore
+/usr/edb/as11/bin/pg_restore --host 10.10.10.70 --port 5460 --username enterprisedb --password  -c -v -j 4 -d auto_bd_20210609 /tmp/auto_bd_20210609.dump >> /tmp/auto_bd_20210609.log 2>&1
+/usr/edb/as11/bin/pg_restore --host 10.42.53.70 --port 5444 --username enterprisedb -c -v -d short_db /tmp/mf.dump >> /tmp/mf.log 2>&1
+/usr/edb/as11/bin/pg_restore --host 10.42.53.70 --port 5460 --username enterprisedb -c -v -d short_db /tmp/mf.dump >> /tmp/mf.log 2>&1
